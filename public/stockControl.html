@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <script src="./javascripts/jquery.min.js"></script>
+    <script src="./javascripts/vue.min.js"></script>
+    <link rel="stylesheet" href="./stylesheets/elementUI.css">
+    <link rel="stylesheet" href="./stylesheets/reset.css">
+    <!-- <link rel="stylesheet" href="./stylesheets/index.css"> -->
+
+    <style>
+
+        .el-pagination.is-background .el-pager li:not(.disabled).active{
+        background-color: green;
+        
+}
+.el-pagination span{
+    color: green;
+}
+.cell{
+    text-align: center;
+}
+.line{
+    text-align: center;
+}
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+
+
+        <el-main height="1000px">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <h2>商品添加</h2>
+
+                </div>
+                <div class="text item">
+
+                    <el-form :inline="true" :model="formInline" class="demo-form-inline">
+
+                        <el-form-item label="活动时间" style="width: 100%;">
+                            <el-col :span="11">
+                                <el-date-picker type="date" placeholder="选择日期" v-model="formInline.date1" style="width: 100%;"></el-date-picker>
+                            </el-col>
+                            <el-col class="line" :span="2">-</el-col>
+                            <el-col :span="11">
+                                <el-date-picker type="date" placeholder="选择日期" v-model="formInline.date2" style="width: 100%;"></el-date-picker>
+                            </el-col>
+                        </el-form-item>
+
+
+                        <el-form-item label="关键字">
+                            <el-input v-model="formInline.user" placeholder="关键字"></el-input>
+                        </el-form-item>
+                        <el-form-item label="（商品名称,条形码）">
+                            <el-button type="success" @click="onSubmit">查询</el-button>
+                        </el-form-item>
+                    </el-form>
+                    <el-table :data="tableData" style="width: 100%">
+
+                        ''
+                        <el-table-column label="条形码" width="180">
+                            <template slot-scope="scope">
+                                <i class="el-icon-time"></i>
+                                <span style="margin-left: 10px">{{ scope.row.barCard }}</span>
+                            </template>
+                        </el-table-column>
+
+
+                        <el-table-column label="商品名称" width="180">
+                            <template slot-scope="scope">
+
+                                <span style="margin-left: 10px">{{ scope.row.name }}</span>
+
+
+
+                            </template>
+                        </el-table-column>
+
+                        <el-table-column label="库存" width="180">
+                            <template slot-scope="scope">
+                                <span style="margin-left: 10px">{{ scope.row.amount }}</span>
+
+
+                            </template>
+                        </el-table-column>
+
+                        <el-table-column label="售价(元）" width="180">
+                            <template slot-scope="scope">
+                                <span style="margin-left: 10px">{{ scope.row.SLSalePrice }}</span>
+
+
+
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="促销价" width="180">
+                            <template slot-scope="scope">
+                                <span style="margin-left: 10px">{{ scope.row.price }}</span>
+
+
+                                </el-popover>
+                            </template>
+                        </el-table-column>
+
+
+                        <el-table-column label="退款" width="180">
+                            <template slot-scope="scope">
+                                <span style="margin-left: 10px">{{ scope.row.amountMoney }}</span>
+
+
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="销售时间" width="180">
+                            <template slot-scope="scope">
+                                <span style="margin-left: 10px">{{ scope.row.saleMoney }}</span>
+
+                            </template>
+                        </el-table-column>
+
+
+
+
+
+                    </el-table>
+
+
+                    <el-pagination background layout="prev, pager, next" page-size='100' :total="400" prev-text="上一页"
+                        next-text='下一页'>
+                    </el-pagination>
+
+                </div>
+
+
+
+        </el-main>
+
+
+    </div>
+    <script src="./javascripts/elementUI.js"></script>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    formInline: {
+                        user: '',
+                        region: '',
+                        date1: "",
+                        date2: ""
+                    },
+                    tableData: [{
+                        barCard: '2016-05-02',
+                        name: '王小虎',
+                        region: '查查',
+                        SLSalePrice: '134',
+                        price: '为促销',
+                        marketPrice: '120',
+                        amount: '40',
+                        amountMoney: '400',
+                        saleMoney: '10000'
+
+                    },
+                    {
+                        barCard: '2016-05-02',
+                        name: '王小虎',
+                        region: '查查',
+                        SLSalePrice: '134',
+                        price: '为促销',
+                        marketPrice: '120',
+                        amount: '40',
+                        amountMoney: '400',
+                        saleMoney: '10000'
+
+                    }
+                    ]
+
+
+
+
+
+                }
+            },
+            methods: {
+                onSubmit() {
+                    console.log('submit!');
+                },
+                handleEdit(index, row) {
+                    console.log(index, row);
+                },
+                handleDelete(index, row) {
+                    console.log(index, row);
+                }
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>

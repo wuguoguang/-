@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <script src="./javascripts/jquery.min.js"></script>
+    <script src="./javascripts/vue.min.js"></script>
+    <link rel="stylesheet" href="./stylesheets/elementUI.css">
+    <link rel="stylesheet" href="./stylesheets/reset.css">
+    <!-- <link rel="stylesheet" href="./stylesheets/index.css"> -->
+
+    <style>
+        #container div{
+            margin: 0 0 0 -120px !important;
+        }
+
+
+
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+
+
+        <el-main height="1000px">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <h2>商品添加</h2>
+
+                </div>
+                <div class="text item">
+                    <el-form :inline="true" :model="formInline" class="demo-form-inline">
+
+                        <el-form-item label="活动时间">
+                            <el-col :span="11">
+                                <el-date-picker type="date" placeholder="选择日期" v-model="formInline.date1" style="width: 100%;"></el-date-picker>
+                            </el-col>
+                            <el-col class="line" :span="2">-</el-col>
+                            <el-col :span="11">
+                                <el-date-picker type="date" placeholder="选择日期" v-model="formInline.date2" style="width: 100%;"></el-date-picker>
+                            </el-col>
+                        </el-form-item>
+                        <el-form-item label="（商品名称,条形码）">
+                            <el-button type="success" @click="onSubmit">查询</el-button>
+                        </el-form-item>
+
+
+                       
+                    </el-form>
+ <div id="container" style="height: 800px"></div>
+
+                </div>
+
+
+
+        </el-main>
+
+
+    </div>
+    <script src="./javascripts/elementUI.js"></script>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    formInline: {
+                        user: '',
+                        region: '',
+                        date1: "",
+                        date2: ""
+                    }
+                }
+            },
+            methods: {
+                onSubmit() {
+                    console.log('submit!');
+                }
+            }
+        })
+
+
+
+    </script>
+
+
+
+
+    <script type="text/javascript" src="./javascripts/echarts.simple.min.js"></script>
+
+    <script type="text/javascript">
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        // var app = {};
+        option = null;
+        option = {
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [2, 932, 200, 30, 1290, 700, 1320],
+                type: 'line'
+            }]
+        };
+        ;
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    </script>
+</body>
+
+</html>

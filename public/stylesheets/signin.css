@@ -1,0 +1,55 @@
+html,body,#app{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: url(../images/index.jpg) no-repeat center center;
+    background-size: cover
+}
+
+
+ .text {
+    font-size: 14px;
+  }
+
+  .item {
+    margin-bottom: 18px;
+  }
+
+
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+  .clearfix:after {
+    clear: both;
+  }
+
+  .box-card {
+      height: 280px;
+    width: 480px;
+    position:absolute;
+    top: 0;
+    bottom: 200px;
+    left:0;
+    right:0;
+    margin: auto;
+  }  
+  .el-card__header{
+    padding: 5px 20px;
+  }
+  .box-card h1{
+      font-size: 20px;
+      color: #999;
+      
+  }
+  .box-card h1 i{
+    
+    color: rgb(64, 21, 221);
+    
+}
+.el-form-item.is-required:not(.is-no-asterisk)>.el-form-item__label:before{
+    content: ""!important;
+}

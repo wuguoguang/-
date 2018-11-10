@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <script src="./javascripts/jquery.min.js"></script>
+    <script src="./javascripts/vue.min.js"></script>
+    <link rel="stylesheet" href="./stylesheets/elementUI.css">
+    <link rel="stylesheet" href="./stylesheets/reset.css">
+    <link rel="stylesheet" href="./stylesheets/index.css">
+
+</head>
+
+<body>
+    <div id="app">
+
+
+        <el-main height="1000px">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <h2>系统信息</h2>
+
+                </div>
+                <div class="text item">
+
+                    <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+                        <el-form-item label="原密码" prop="oldpass">
+                            <el-input v-model="ruleForm2.oldpass"></el-input>
+                        </el-form-item>
+                        <el-form-item label="新密码" prop="pass">
+                            <el-input type="password" v-model="ruleForm2.pass" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="确认密码" prop="checkPass">
+                            <el-input type="password" v-model="ruleForm2.checkPass" autocomplete="off"></el-input>
+                        </el-form-item>
+
+
+
+
+
+                        <el-form-item>
+                            <el-button type="primary" @click="submitForm('ruleForm2')">修改</el-button>
+
+                        </el-form-item>
+                    </el-form>
+
+
+                </div>
+
+            </el-card>
+        </el-main>
+
+
+
+
+
+
+
+
+
+    </div>
+    <script src="./javascripts/elementUI.js"></script>
+
+    <script>
+        let [, u_id] = location.href.split("=")
+
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                var validatePass = (rule, value, callback) => {
+                    if (value == this.ruleForm2.oldpass) {
+                        callback(new Error('新旧密码不能一样'));
+                    } else {
+                        callback();
+                    }
+                };
+                var validatePass2 = (rule, value, callback) => {
+                    if (value === '') {
+                        callback(new Error('请再次输入密码'));
+                    } else if (value !== this.ruleForm2.pass) {
+                        callback(new Error('两次输入密码不一致!'));
+                    } else {
+                        callback();
+                    }
+                };
+                return {
+                    ruleForm2: {
+                        pass: '',
+                        checkPass: '',
+                        oldpass: '',
+                        u_id
+
+
+                    },
+                    rules2: {
+                        pass: [
+                            { required: true, message: '请输入新密码', trigger: 'blur' },
+                            { validator: validatePass, trigger: 'blur' }
+                        ],
+                        checkPass: [
+                            { required: true, message: '请确认密码', trigger: 'blur' },
+                            { validator: validatePass2, trigger: 'blur' }
+                        ],
+                        oldpass: [
+                            { required: true, message: '请输入原密码', trigger: 'blur' },
+
+                        ]
+
+                    }
+                };
+            },
+            methods: {
+                open() {
+                    this.$alert('密码修改成功', {
+                        confirmButtonText: '确定',
+                        callback: action => {
+                           location.href="/admin_list.html"
+                        }
+                    });
+                },
+                err() {
+                    this.$alert('密码修改失败', {
+                        confirmButtonText: '确定',
+                        
+                      
+                    });
+                },
+
+
+                submitForm(formName) {
+                    // console.log(this.ruleForm2)
+                    this.$refs[formName].validate((valid) => {
+                        if (valid) {
+                            $.post("/users/revision", this.ruleForm2, function (data) {
+                                let stauts = data.ok
+                                if (stauts) {
+                                    // alert("好")
+                                    vm.open()
+
+                                }
+                                else {
+                                    // alert("bu ")
+                                   vm.err()
+                                }
+                            })
+                        } else {
+                            return false;
+                        }
+                    });
+                },
+
+            }
+
+        })
+
+
+    </script>
+</body>
+
+</html>

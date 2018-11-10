@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <script src="./javascripts/jquery.min.js"></script>
+    <script src="./javascripts/vue.min.js"></script>
+    <link rel="stylesheet" href="./stylesheets/elementUI.css">
+    <link rel="stylesheet" href="./stylesheets/reset.css">
+    <link rel="stylesheet" href="./stylesheets/goodAdds.css">
+    <!-- <link rel="stylesheet" href="./stylesheets/index.css"> -->
+
+</head>
+
+<body>
+    <div id="app">
+
+
+        <el-main height="1000px">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <h2>商品添加</h2>
+
+                </div>
+                <div class="text item">
+
+
+
+                    <el-form :label-position="labelPosition" :model="ruleForm" :rules="rules" ref="ruleForm"
+                        label-width="100px" class="demo-ruleForm">
+
+                        <el-form-item label="所属分类" prop="region">
+                            <el-select v-model="ruleForm.region" placeholder="--请选择分类--">
+                                <el-option label="区域一" value="shanghai"></el-option>
+                                <el-option label="区域二" value="beijing"></el-option>
+                            </el-select>
+                        </el-form-item>
+
+                        <el-form-item label="商品条形码" prop="barCard">
+                            <el-input v-model="ruleForm.barCard"></el-input>
+                        </el-form-item>
+                        <el-form-item label="商品名称" prop="name">
+                            <el-input v-model="ruleForm.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="商品售价" prop="SLSalePrice">
+                            <el-input v-model="ruleForm.SLSalePrice"></el-input>
+                        </el-form-item>
+                        <el-form-item label="市场价" prop="marketPrice">
+                            <el-input v-model="ruleForm.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="商品进价" prop="purchasingPrice">
+                            <el-input v-model="ruleForm.purchasingPrice"></el-input>
+                        </el-form-item>
+                        <el-form-item label="入库数量" prop="amount">
+                            <el-input v-model="ruleForm.amount"></el-input>
+                        </el-form-item>
+                        <el-form-item label="商品重量" prop="weight">
+                            <el-input v-model="ruleForm.weight"></el-input>
+                        </el-form-item>
+                        <el-form-item label="商品单位" prop="units">
+                            <el-input v-model="ruleForm.units"></el-input>
+                        </el-form-item>
+
+
+
+
+                        <el-form-item label="会员优惠" prop="isDiscounts">
+                            <el-radio-group v-model="ruleForm.isDiscounts">
+                                <el-radio label="享受"></el-radio>
+                                <el-radio label="不享受"></el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                        <el-form-item label="是否促销" prop="isPromotion">
+                            <el-radio-group v-model="ruleForm.isPromotion">
+                                <el-radio label="启用"></el-radio>
+                                <el-radio label="禁用"></el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+
+                        <el-form-item label="商品简介" prop="productDesc">
+                            <el-input type="textarea" v-model="ruleForm.productDesc"></el-input>
+                        </el-form-item>
+
+                        <el-form-item>
+                            <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+                            <el-button @click="resetForm('ruleForm')">重置</el-button>
+                        </el-form-item>
+
+                    </el-form>
+
+
+                </div>
+
+            </el-card>
+        </el-main>
+
+
+
+
+
+
+
+
+
+    </div>
+    <script src="./javascripts/elementUI.js"></script>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    ruleForm: {
+                        region: '',
+                        barCard: '',
+                        name: '',
+                        SLSalePrice: '',
+                        marketPrice: '',
+                        purchasingPrice: '',
+                        amount: '',
+                        weight: '',
+                        units: '',
+                        isDiscounts: '享受',
+                        isPromotion: '禁用',
+                        productDesc: ''
+                    },
+                    labelPosition: 'top',
+                    rules: {
+                        region: [
+                        { required: true, message: '请选择活动区域', trigger: 'change' }
+                            
+                        ],
+                        barCard: [
+                            { required: true, message: '请输入条形码', trigger: 'blur' },
+                           
+                        ],
+                        name: [
+                            { required: true, message: '请输入商品名称', trigger: 'blur' }
+                        ],
+                        SLSalePrice: [
+                        { required: true, message: '请输入商品售价', trigger: 'blur' }
+                        ]
+                        // ,
+                        // marketPrice: [
+                        // { required: true, message: '请选择活动资源', trigger: 'change' }
+                        // ],
+                        // purchasingPrice: [
+                        //     { required: true, message: '请选择活动资源', trigger: 'change' }
+                        // ],
+                        // amount: [
+                        //     { required: true, message: '请选择活动资源', trigger: 'change' }
+                        // ],
+                        // weight: [
+                        //     { required: true, message: '请选择活动资源', trigger: 'change' }
+                        // ],
+                        // units: [
+                        //     { required: true, message: '请选择活动资源', trigger: 'change' }
+                        // ],
+                        // isDiscounts: [
+                        //     { required: true, message: '请选择活动资源', trigger: 'change' }
+                        // ],
+                        // isPromotion: [
+                        //     { required: true, message: '请选择活动资源', trigger: 'change' }
+                        // ],
+                        // productDesc: [
+                        //     { required: true, message: '请填写活动形式', trigger: 'blur' }
+                        // ]
+                    }
+                };
+            },
+
+            methods: {
+
+                submitForm(formName) {
+                    this.$refs[formName].validate((valid) => {
+                        if (valid) {
+                         
+                        } else {
+                            return false;
+                        }
+                    });
+                },
+                resetForm(formName) {
+                    console.log(formName)
+                    this.$refs[formName].resetFields();
+                }
+            }
+
+        })
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <script src="./javascripts/jquery.min.js"></script>
+    <script src="./javascripts/vue.min.js"></script>
+    <link rel="stylesheet" href="./stylesheets/elementUI.css">
+    <link rel="stylesheet" href="./stylesheets/reset.css">
+    <link rel="stylesheet" href="./stylesheets/index.css">
+
+</head>
+
+<body>
+    <div id="app">
+
+
+        <el-main height="1000px">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <h2>账户列表</h2>
+
+                </div>
+                <div class="text item">
+
+                    <el-table :data="tableData" style="width: 100%">
+
+                        <el-table-column label="用户名称" width="380">
+                            <template slot-scope="scope">
+                                <el-popover placement="top">
+
+                                    <div slot="reference" class="name-wrapper">
+                                        <el-tag size="medium">{{ scope.row.name }}</el-tag>
+                                    </div>
+                                </el-popover>
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="用户组" width="380">
+                            <template slot-scope="scope">
+
+                                <span style="margin-left: 0px">{{ scope.row.usergroup }}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="用户组" width="380">
+                            <template slot-scope="scope">
+
+                                <span style="margin-left: 0px">{{ scope.row.ceratTime | formatDate }}</span>
+                            </template>
+                        </el-table-column>
+
+                        <el-table-column label="管理">
+                            <template slot-scope="scope">
+                                <el-button size="mini" @click="handleEdit(scope.$index, scope.row)" plain> <i class="el-icon-edit"></i>编辑</el-button>
+                                <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)"
+                                    plain><i class="el-icon-delete"></i>删除</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+
+                </div>
+
+            </el-card>
+        </el-main>
+
+    </div>
+    <script src="./javascripts/elementUI.js"></script>
+
+    <script>
+        // 方法1
+
+
+
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    tableData: []
+                }
+            },
+
+            methods: {
+                handleEdit(index, row) {
+                    let { u_id } = row;
+                    location.href = `admin_revision.html?u_id=${u_id}`;
+                    // $.post("/user/revisionJump",name,function(data){
+
+                    //     console.log(data)
+                    // })                       
+                },
+                handleDelete(index, row) {
+                    this.$confirm('确定删除..., 是否继续?', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        let { u_id } = row;
+                        $.post("./users/del", { u_id }, function (data) {
+                            if (data.affectedRows === 1) {
+                                $.get("/users/list", function (data) {
+                                    vm.tableData = data
+
+                                })
+                            }
+                        });
+
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+
+                        })
+
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '已取消删除'
+                        });
+                    });
+
+                }
+            },
+
+            filters: {
+                formatDate: function (val) {
+                    var padDate = function (va) {
+                        va = va < 10 ? '0' + va : va;
+                        return va
+                    }
+                    var value = new Date(val);
+                    var year = value.getFullYear();
+                    var month = padDate(value.getMonth() + 1);
+                    var day = padDate(value.getDate());
+                    // var hour = padDate(value.getHours());
+                    // var minutes = padDate(value.getMinutes());
+                    // var seconds = padDate(value.getSeconds());
+                    return year + '-' + month + '-' + day;
+                }
+            },
+            mounted() {
+                let _this = this;
+                $.get("/users/list", function (data) {
+                    
+                    _this.tableData = data
+
+
+                })
+
+
+
+            }
+
+
+
+        })
+
+
+
+
+
+
+        // var aa = '';
+        // new Promise((resolve, reject) => {
+        //     $.get("/users/list", function (data) {
+        //         resolve(data)
+        //     })
+        // }).then((data) => {
+        //     a = data
+        //     console.log(a)
+        //     var vm = new Vue({
+        //         el: "#app",
+        //         data() {
+        //             return {
+        //                 tableData: a
+        //             }
+        //         },
+        //         methods: {
+        //             handleEdit(index, row) {
+        //                 let {u_id} = row;
+        //                 location.href=`admin_revision.html?u_id=${u_id}`;
+        //                 // $.post("/user/revisionJump",name,function(data){
+
+        //                 //     console.log(data)
+        //                 // })                       
+        //             },
+        //             handleDelete(index, row) {
+        //                 this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        //                     confirmButtonText: '确定',
+        //                     cancelButtonText: '取消',
+        //                     type: 'warning'
+        //                 }).then(() => {
+        //                     let { u_id } = row;
+        //                     $.post("./users/del", { u_id }, function (data) {
+        //                         if (data.affectedRows === 1) {
+        //                             $.get("/users/list", function (data) {
+        //                                 vm.tableData = data
+
+        //                             })
+        //                         }
+        //                     });
+
+        //                     this.$message({
+        //                         type: 'success',
+        //                         message: '删除成功!'
+
+        //                     })
+
+        //                 }).catch(() => {
+        //                     this.$message({
+        //                         type: 'info',
+        //                         message: '已取消删除'
+        //                     });
+        //                 });
+
+        //             }
+        //         }
+
+        //     })
+
+        // }) 
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

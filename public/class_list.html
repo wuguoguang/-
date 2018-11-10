@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <script src="./javascripts/jquery.min.js"></script>
+    <script src="./javascripts/vue.min.js"></script>
+    <link rel="stylesheet" href="./stylesheets/elementUI.css">
+    <link rel="stylesheet" href="./stylesheets/reset.css">
+    <link rel="stylesheet" href="./stylesheets/index.css">
+
+</head>
+
+<body>
+    <div id="app">
+
+
+        <el-main height="1000px">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <h2>账户列表</h2>
+
+                </div>
+                <div class="text item">
+
+
+                    <el-table :data="tableData" style="width: 100%" :row-class-name="tableRowClassName">
+
+                        <el-table-column label="分类名称" width="1100px">
+                            <template slot-scope="scope">
+
+
+                                <div slot="reference" class="name-wrapper">
+                                    <el-tag size="medium">{{ scope.row.designation }}</el-tag>
+                                </div>
+
+                            </template>
+                        </el-table-column>
+
+
+                        <el-table-column label="管理">
+                            <template slot-scope="scope">
+                                <el-button size="mini" @click="handleEdit(scope.$index, scope.row)" plain> <i class="el-icon-edit"></i>编辑</el-button>
+                              
+                            </template>
+                        </el-table-column>
+                    </el-table>
+
+                </div>
+
+            </el-card>
+        </el-main>
+
+    </div>
+    <script src="./javascripts/elementUI.js"></script>
+
+    <script>
+
+
+
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    tableData: [{
+                        designation: '2016-05-02',
+                    }, {
+                        designation: '2016-05-02',
+                    }]
+                }
+            },
+            methods: {
+                tableRowClassName({ row, rowIndex }) {
+                    if (rowIndex === 0) {
+                        return 'success-row';
+                    } else if (rowIndex === 2) {
+                        return 'success-row';
+                    }
+                    return '';
+                },
+                handleEdit(index, row) {
+                    let { name } = row;
+
+                    location.href = "/admin_revision.html?"
+
+                },
+                handleDelete(index, row) {
+                    var a = confirm('你确定要删除?')
+                    if (a) {
+                        let { u_id } = row;
+                        $.post("./users/del", { u_id }, function (data) {
+                            if (data.affectedRows === 1) {
+                                $.get("/users/list", function (data) {
+                                    vm.tableData = data
+
+                                })
+                            }
+
+
+                        })
+                    }
+
+                }
+            }
+
+        })
+    //     var aa = '';
+    //     new Promise((resolve, reject) => {
+    //         $.get("/users/list", function (data) {
+    //             resolve(data)
+    //         })
+    //     }).then((data) => {
+    //         a = data
+    // console.log(a)
+    //         var vm = new Vue({
+    //             el: "#app",
+    //             data() {
+    //                 return {
+    //                     tableData: a
+    //                 }
+    //             },
+    //             methods: {
+    //                 handleEdit(index, row) {
+    //                     let { name} = row;
+
+    //                     location.href="/admin_revision.html?"
+
+    //                 },
+    //                 handleDelete(index, row) {
+    //                     var a=confirm('你确定要删除?')
+    //                     if(a){
+    //                          let { u_id } = row;
+    //                     $.post("./users/del", { u_id }, function (data) {
+    //                         if (data.affectedRows === 1) {
+    //                             $.get("/users/list", function (data) {
+    //                                 vm.tableData = data
+
+    //                             })
+    //                         }
+
+
+    //                     }) 
+    //                     }
+
+    //                 }
+    //             }
+
+    //         })
+
+    //     })
+
+
+
+        // $.get("/users/list", function (data) {
+
+        //     console.log(data)
+        //     aa = data
+
+
+        // })
+
+
+
+    </script>
+</body>
+
+</html>

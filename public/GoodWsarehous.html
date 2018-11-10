@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <script src="./javascripts/jquery.min.js"></script>
+    <script src="./javascripts/vue.min.js"></script>
+    <link rel="stylesheet" href="./stylesheets/elementUI.css">
+    <link rel="stylesheet" href="./stylesheets/reset.css">
+    <link rel="stylesheet" href="./stylesheets/index.css">
+
+
+        <style>
+        
+
+            .el-form .el-input{
+                width: 10%;
+            }
+            
+        
+        </style>
+</head>
+
+<body>
+    <div id="app">
+
+
+        <el-main height="1000px">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <h2>商品入库</h2>
+
+                </div>
+                <div class="text item">
+
+                    <el-form :label-position="labelPosition" :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+                        <el-form-item label="商品条形码" prop="barCard" >
+                            <el-input type="text" v-model="ruleForm2.barCard" autocomplete="off" style="width: 400px;"></el-input>
+                        </el-form-item>
+                        <el-form-item label="数量" prop="amount">
+                            <el-input type="password" v-model="ruleForm2.amount" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="进价" prop="purchasingPrice">
+                            <el-input v-model.number="ruleForm2.purchasingPrice"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="success" @click="submitForm('ruleForm2')">入库</el-button>
+                          
+                        </el-form-item>
+                    </el-form>
+
+
+
+                </div>
+
+            </el-card>
+        </el-main>
+
+
+
+
+
+
+
+
+
+    </div>
+    <script src="./javascripts/elementUI.js"></script>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+
+            data() {
+                return {
+                    ruleForm2: {
+                        barCard: '',
+                        amount: '',
+                        purchasingPrice: ''
+                    },
+                    labelPosition: 'top',
+                    rules2: {
+                        barCard: [
+                        { required: true, message: '请输入活动名称', trigger: 'blur' }
+                          
+                        ],
+                        amount: [
+                        { required: true, message: '请输入活动名称', trigger: 'blur' },
+                    ],
+                        purchasingPrice: [
+                        { required: true, message: '请输入活动名称', trigger: 'blur' },
+                        ]
+                    }
+                };
+            },
+            methods: {
+                submitForm(formName) {
+                    this.$refs[formName].validate((valid) => {
+                        if (valid) {
+                            alert('submit!');
+                        } else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
+                },
+              
+            }
+
+        })
+
+
+    </script>
+</body>
+
+</html>

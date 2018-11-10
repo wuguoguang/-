@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <script src="./javascripts/jquery.min.js"></script>
+    <script src="./javascripts/vue.min.js"></script>
+    <link rel="stylesheet" href="./stylesheets/elementUI.css">
+    <link rel="stylesheet" href="./stylesheets/reset.css">
+    <link rel="stylesheet" href="./stylesheets/index.css">
+    <style>
+
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+
+        <el-main height="600px">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <h2>添加编辑账号</h2>
+
+                </div>
+                <div class="text item">
+
+                    <el-form ref="form" :model="form" label-width="80px" :rules="rules">
+                        <el-form-item label="真实姓名" prop="name">
+                            <el-input v-model="form.name"></el-input>
+                        </el-form-item>
+
+                        <el-form-item label="会员卡号" prop="barCard">
+                            <el-input v-model="form.barCard"></el-input>
+                        </el-form-item>
+
+
+
+                        <el-form-item label="用户组" prop="region">
+                            <el-select v-model="form.region" placeholder="请选择">
+                                <el-option label="普通会员" value="普通会员"></el-option>
+                                <el-option label="大众会员" value="大众会员"></el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="身份证号">
+                            <el-input v-model="form.idCard"></el-input>
+                        </el-form-item>
+
+                        <el-form-item label="用户状态">
+                            <el-radio-group v-model="form.status">
+                                <el-radio label="启用"></el-radio>
+                                <el-radio label="禁用"></el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+
+                        <el-form-item label="电话号码">
+                            <el-input v-model="form.mabile"></el-input>
+                        </el-form-item>
+
+                        <el-form-item label="座机号码">
+                            <el-input v-model="form.phone"></el-input>
+                        </el-form-item>
+
+                        <el-form-item label="邮箱地址">
+                            <el-input v-model="form.emailAdress"></el-input>
+                        </el-form-item>
+
+                        <!-- 地区选择 -->
+
+                        <el-form-item label="详细地址">
+                            <el-input v-model="form.adress"></el-input>
+                        </el-form-item>
+
+                        <el-form-item label="邮政编码">
+                            <el-input v-model="form.email"></el-input>
+                        </el-form-item>
+
+                        <el-form-item>
+                            <el-button type="primary" @click="submitForm('form')">添加</el-button>
+
+                        </el-form-item>
+                    </el-form>
+                </div>
+
+            </el-card>
+        </el-main>
+
+
+
+
+
+
+
+
+
+    </div>
+    <script src="./javascripts/elementUI.js"></script>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    form: {
+                        name: '',
+                        barCard: '',
+                        region: '普通会员',
+                        idCard: '',
+                        status: '启用',
+                        mabile: '',
+                        phone: '',
+                        emailAdress: '',
+                        adress: '',
+                        email: ''
+
+                    },
+                    rules: {
+                        name: [
+                            { required: true, message: '请输入活动名称', trigger: 'blur' },
+                            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                        ],
+                        barCard: [
+                            { required: true, message: '请输入活动名称', trigger: 'blur' },
+                            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+
+                        ],
+                        region: [
+                            { required: true, message: '请输入活动名称', trigger: 'change' },
+
+
+                        ]
+                    }
+
+                }
+            },
+            methods: {
+                submitForm(form) {
+                    this.$refs[form].validate((valid) => {
+                        if (valid) {
+                            alert('submit!');
+                        } else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
+                },
+            }
+
+
+        })
+
+
+    </script>
+</body>
+
+</html>

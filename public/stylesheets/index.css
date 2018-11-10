@@ -1,0 +1,223 @@
+html,body,#app,.el-container{
+    height: 100%;
+}
+.el-header, .el-footer {
+    background-color: #f9f9f9;
+    
+    padding: 0px 20px;
+   
+  }
+  .el-footer p{
+      line-height: 50px;
+      border-top: 1px solid #ccc;
+     
+  }
+  .el-header h2{
+    font-size: 30px;
+    line-height: 60px;
+    font-weight: bold;
+}
+  .el-header p{
+      font-size: 12px;
+      line-height: 20px;
+  }
+  
+  .el-aside {
+    background: url(../images/left_bg.png) repeat-y;
+    color: #fff;
+    text-align: right;
+   
+  }
+  /* 左导航文字 */
+  #leftTitle h2{
+    line-height: 100px;
+    font-size: 26px;
+   
+  }
+  #leftTitle p{
+    line-height: 30px;
+    
+   
+  }
+  #leftTitle a{
+    color: #fff;
+   
+  } 
+
+
+  /* 导航菜单 */
+  .el-menu{
+      background: transparent;
+  }
+  .el-menu a{
+    color: #fff;
+    text-decoration: none;
+}
+  .el-submenu__title i {
+    color: #909399;
+    display: none;
+}
+
+.el-submenu{
+    width: 210px;
+    margin-left: 20px;
+    margin-bottom: 14px;
+    
+}
+.el-submenu__title{
+    height: 33px;
+    background:url(../images/menu_bg.png) repeat-y;
+    line-height: 33px;
+    border-radius: 4px 0 0 4px;
+}
+.el-submenu .el-menu-item{
+    padding:0 20px;
+    height: 33px;
+    line-height: 33px;
+}
+
+/* hover */
+.el-submenu__title:hover {
+    background:url(../images/menu_bg.png) repeat-y;
+}
+.el-menu-item.is-active{
+    background: transparent;
+    
+}
+.el-menu-item.is-active:after{
+    position:absolute;
+    top: 6px;
+    content: "";
+    width: 0px;
+    height: 0px;
+    border: 10px solid transparent;
+    border-color: transparent #fff transparent transparent;
+
+}
+ .el-menu-item:hover{
+    background: rgba(255, 255, 255, .2)
+}
+
+
+
+  .el-main {
+    background-color: #E9EEF3;
+    color: #333;
+    
+   
+  }
+  
+
+  body > .el-container {
+    margin-bottom: 40px;
+    padding-left:20px;
+  }
+  /* 右侧主体 */
+
+  .c57a000{color: #57a000;}
+
+/* 系统信息背景 */
+.el-alert--info{
+     background:#dbefff;
+      border: 1px solid #a2b4ee;
+      border-radius: 10px;
+}
+  .el-card__header{
+      background: #ccc;
+      border-radius: 4px;
+     
+  }
+  .el-card__header h2{
+      font-weight: bold;
+  }
+  .text {
+    font-size: 14px;
+  }
+  .el-alert__title{
+      line-height: 30px;
+
+  }
+  .el-alert--info .el-alert__content P{
+      color: #57a000;
+      line-height: 30px;
+
+  }
+  .el-alert__icon.is-big{
+      font-size: 16PX;
+      width: 16PX;
+  }
+
+  .item {
+    margin-bottom: 18px;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+  .clearfix:after {
+    clear: both
+  }
+  .el-alert--info{
+      margin: 10px 0px;
+      color:rgb(40, 2, 145);
+  }
+  .el-alert--info .el-alert__content{
+    
+    color:#000;
+}
+
+ 
+
+
+.el-row {
+    margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .bg-purple {
+    background: #d3dce6;
+  }
+ 
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  }
+  .row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+  }
+
+
+  .el-table .warning-row {
+    background: oldlace;
+  }
+
+  .el-table .success-row {
+    background: #eee;
+  }
+
+
+  /* 会员添加页面 */
+  .el-input{
+      width: 40%;
+  }
+.el-input--suffix{
+    width: 100%;
+}
+
+
+
+/* 分类 */
+.el-radio__input.is-checked+.el-radio__label{
+  color: #000;
+}
+.el-radio__input.is-checked .el-radio__inner{
+  border-color: #ccc;
+  background: #ccc;
+}
